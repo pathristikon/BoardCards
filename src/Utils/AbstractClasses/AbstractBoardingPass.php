@@ -13,11 +13,11 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
 
     public function __construct($card)
     {
-        $this->destination = $card['arrival'];
-        $this->departure   = $card['departure'];
         $this->requirements = Cards::$requirements;
+        $this->checkingCardRequirements($card);
 
-        $this->checkingCardRequirements($card, $this->requirements);
+        $this->destination  = $card['arrival'];
+        $this->departure    = $card['departure'];
     }
 
     public function getDestination()
@@ -30,17 +30,14 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
         return $this->departure;
     }
 
-    private function checkingCardRequirements($card, $requirements)
+    private function checkingCardRequirements($card)
     {
         $cardKeys = array_keys($card);
 
-        foreach($cardKeys as $key => $value)
+        if(!empty(array_diff($this->requirements, $cardKeys)))
         {
-           if(!in_array($value, $requirements))
-           {
-               // TODO: output class instead of exception handling
-               throw new \Exception('Missing required key ' . $value);
-           }
+            echo 'Error!';
+            exit;
         }
     }
 }
