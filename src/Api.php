@@ -7,6 +7,7 @@ use App\Utils\Cards;
 
 class Api
 {
+
     private $cards;
     private $types;
 
@@ -15,12 +16,14 @@ class Api
         $this->cards = $cards;
         $this->types = Cards::$types;
 
-        $this->createCards();
+        $allBoardingCards = $this->createCards();
+        $this->sortBoardingCards($allBoardingCards);
+        var_dump($allBoardingCards);
     }
 
     private function createCards()
     {
-        array_map([$this, 'createCardsCallback'], $this->cards);
+        return array_map([$this, 'createCardsCallback'], $this->cards);
     }
 
     private function createCardsCallback($val)
@@ -28,8 +31,18 @@ class Api
         if(in_array($val['type'], array_keys($this->types)))
         {
             $class = $this->types[$val['type']];
-            new $class($val);
+            return new $class($val);
         }
     }
 
+    public function sortBoardingCards(array $cards)
+    {
+        return usort($cards, function($a, $b) {
+            if($a->getDeparture() !== $b->getDestination())
+            {
+                return 1;
+            }
+            return false;
+        });
+    }
 }

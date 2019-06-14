@@ -11,7 +11,7 @@ $data = [
         'arrival' => 'Londra'
     ],
     [
-        'type' => 'boat',
+        'type' => 'Boat',
         'departure' => 'Belgrad',
         'arrival' => 'Munchen'
     ],

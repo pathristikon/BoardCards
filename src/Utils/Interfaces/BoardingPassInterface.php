@@ -6,4 +6,6 @@ interface BoardingPassInterface
     public function getDestination();
 
     public function getDeparture();
+
+    public function getType();
 }
