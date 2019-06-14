@@ -6,19 +6,22 @@ use App\Api;
 
 $data = [
     [
-        'type' => 'Plane',
+        'type'      => 'Plane',
         'departure' => 'Munchen',
-        'arrival' => 'Londra'
+        'arrival'   => 'Londra',
+        'sit'       => '32B'
     ],
     [
-        'type' => 'Boat',
+        'type'      => 'Boat',
         'departure' => 'Belgrad',
-        'arrival' => 'Munchen'
+        'arrival'   => 'Munchen',
+        'sit'       => '40'
     ],
     [
-        'type' => 'Plane',
+        'type'      => 'Plane',
         'departure' => 'Paris',
-        'arrival' => 'Belgrad'
+        'arrival'   => 'Belgrad',
+        'sit'       => '54F'
     ]
 ];
 

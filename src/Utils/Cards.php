@@ -12,6 +12,7 @@ class Cards
     static $requirements = [
       'arrival',
       'departure',
-      'type'
+      'type',
+      'sit'
     ];
 }

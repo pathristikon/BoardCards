@@ -4,13 +4,18 @@ namespace App\Utils\AbstractClasses;
 
 use App\Utils\Interfaces\BoardingPassInterface;
 use App\Utils\Cards;
+use App\Utils\Traits;
 
 abstract class AbstractBoardingPass implements BoardingPassInterface
 {
+    use Traits;
+
     private $destination;
     private $departure;
+    private $sit;
     private $type;
     private $requirements;
+    public  $output;
 
     public function __construct($card)
     {
@@ -19,7 +24,13 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
 
         $this->destination = $card['arrival'];
         $this->departure   = $card['departure'];
+        $this->sit   = $card['sit'];
         $this->type        = $card['type'];
+
+        $this->output = 'Take ' . $this->type .
+            ' from ' . $this->departure .
+            ' to ' . $this->destination .
+            '. Sit in seat ' . $this->sit;
     }
 
     public function getDestination(): string
@@ -32,14 +43,14 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
         return $this->departure;
     }
 
+    public function getSit(): string
+    {
+        return $this->sit;
+    }
+
     public function getType(): string
     {
         return $this->type;
-    }
-
-    public function getReturnString(): string
-    {
-        return 'Take the ' . $this->type . ' from ' . $this->departure . 'blablabla';
     }
 
     private function checkingCardRequirements($card)
@@ -48,7 +59,11 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
 
         if(!empty(array_diff($this->requirements, $cardKeys)))
         {
-            echo 'Missing structure error!';
+            $this->returnResponse([
+               'status' => 500,
+               'message' =>  'Missing structure error!'
+            ]);
+
             exit;
         }
     }

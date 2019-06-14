@@ -7,5 +7,7 @@ interface BoardingPassInterface
 
     public function getDeparture();
 
+    public function getSit();
+
     public function getType();
 }
