@@ -4,6 +4,10 @@ namespace App\Utils\BoardingPasses;
 
 use App\Utils\AbstractClasses\AbstractBoardingPass;
 
+/**
+ * Class Plane
+ * @package App\Utils\BoardingPasses
+ */
 class Plane extends AbstractBoardingPass
 {
     public function __construct($val)

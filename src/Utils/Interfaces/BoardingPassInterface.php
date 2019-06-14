@@ -1,13 +1,11 @@
 <?php
 namespace App\Utils\Interfaces;
 
+/**
+ * Interface BoardingPassInterface
+ * @package App\Utils\Interfaces
+ */
 interface BoardingPassInterface
 {
-    public function getDestination();
-
-    public function getDeparture();
-
-    public function getSit();
-
-    public function getType();
+    //
 }
