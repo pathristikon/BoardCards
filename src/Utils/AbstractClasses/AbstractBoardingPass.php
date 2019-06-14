@@ -3,34 +3,30 @@
 namespace App\Utils\AbstractClasses;
 
 use App\Utils\Interfaces\BoardingPassInterface;
-use App\Utils\Cards;
+use App\Utils\Interfaces\RequiredInputInterface;
 use App\Utils\Traits;
+
 
 abstract class AbstractBoardingPass implements BoardingPassInterface
 {
     use Traits;
 
-    private $destination;
-    private $departure;
-    private $sit;
-    private $type;
+    public $destination;
+    public $departure;
+    public $sit;
+    public $type;
     private $requirements;
     public  $output;
 
     public function __construct($card)
     {
-        $this->requirements = Cards::$requirements;
+        $this->requirements = RequiredInputInterface::class;
         $this->checkingCardRequirements($card);
 
         $this->destination = $card['arrival'];
         $this->departure   = $card['departure'];
-        $this->sit   = $card['sit'];
-        $this->type        = $card['type'];
-
-        $this->output = 'Take ' . $this->type .
-            ' from ' . $this->departure .
-            ' to ' . $this->destination .
-            '. Sit in seat ' . $this->sit;
+        $this->sit         = $card['sit'];
+        $this->type        = $card['tp'];
     }
 
     public function getDestination(): string
@@ -53,18 +49,27 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
         return $this->type;
     }
 
+    public static function getClassName()
+    {
+        return __CLASS__;
+    }
+
     private function checkingCardRequirements($card)
     {
         $cardKeys = array_keys($card);
 
-        if(!empty(array_diff($this->requirements, $cardKeys)))
+        foreach($cardKeys as $key)
         {
-            $this->returnResponse([
-               'status' => 500,
-               'message' =>  'Missing structure error!'
-            ]);
+            $const = "$this->requirements::required_" . $key;
+            if(!defined($const))
+            {
+                $this->returnResponse([
+                    'status' => 500,
+                    'message' =>  'Missing structure error!'
+                ]);
 
-            exit;
+                exit;
+            }
         }
     }
 }

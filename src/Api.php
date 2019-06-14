@@ -3,8 +3,8 @@
 
 namespace App;
 
-use App\Utils\Cards;
 use App\Utils\Traits;
+use App\Utils\BoardingPasses\BoardingPassesFactory;
 
 class Api
 {
@@ -16,7 +16,6 @@ class Api
     public function __construct(array $cards)
     {
         $this->cards = $cards;
-        $this->types = Cards::$types;
 
         $allBoardingCards = $this->createCards();
         $this->sortBoardingCards($allBoardingCards);
@@ -29,18 +28,7 @@ class Api
 
     private function createCards()
     {
-        return array_map([$this, 'createCardsCallback'], $this->cards);
-    }
-
-    private function createCardsCallback(array $val)
-    {
-        if(in_array($val['type'], array_keys($this->types)))
-        {
-            $class = $this->types[$val['type']];
-            return new $class($val);
-        }
-
-        return true;
+        return array_map([BoardingPassesFactory::class, 'createCardsCallback'], $this->cards);
     }
 
     private function createBoardingPassesOutput(array $boardingPasses)
