@@ -6,6 +6,7 @@ use App\Utils\AbstractClasses\AbstractBoardingPass;
 
 /**
  * Class Boat
+ *
  * @package App\Utils\BoardingPasses
  */
 class Boat extends AbstractBoardingPass

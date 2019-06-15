@@ -13,4 +13,7 @@ RUN mv composer.phar /usr/bin/composer
 COPY . /var/www/html
 WORKDIR /var/www/html
 
+RUN composer install
+RUN ./vendor/phpunit/phpunit/phpunit
+
 CMD ["apache2-foreground"]

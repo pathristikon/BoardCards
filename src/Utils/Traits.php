@@ -22,16 +22,18 @@ trait Traits
      * A simple syntax for a complex problem.
      * Sorts the array of objects that we created.
      *
-     * @param array $cards
+     * @param  array $cards
      * @return int
      */
     public function sortBoardingCards(array &$cards): int
     {
-        return usort($cards, function ($a, $b) {
-            if ($a->destination !== $b->departure) {
-                return 1;
+        return usort(
+            $cards, function ($a, $b) {
+                if ($a->destination !== $b->departure) {
+                    return 1;
+                }
+                return false;
             }
-            return false;
-        });
+        );
     }
 }

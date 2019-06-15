@@ -36,6 +36,7 @@ class Api implements ApiInterface
 
     /**
      * Return list of boarding cards
+     *
      * @return array
      */
     public function getResponse()
@@ -45,6 +46,7 @@ class Api implements ApiInterface
 
     /**
      * Create the boarding passes objects
+     *
      * @return array
      */
     private function createCards()
@@ -54,14 +56,17 @@ class Api implements ApiInterface
 
     /**
      * Output the result
-     * @param array $boardingPasses
+     *
+     * @param  array $boardingPasses
      * @return array
      */
     private function createBoardingPassesOutput(array $boardingPasses)
     {
-        $boardingPassesOutputs = array_map(function($pass){
-           return $pass->output;
-        }, $boardingPasses);
+        $boardingPassesOutputs = array_map(
+            function ($pass) {
+                return $pass->output;
+            }, $boardingPasses
+        );
 
         array_push($boardingPassesOutputs, 'You arrived at the destination!');
 

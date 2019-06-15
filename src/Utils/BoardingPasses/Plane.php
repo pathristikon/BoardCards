@@ -6,6 +6,7 @@ use App\Utils\AbstractClasses\AbstractBoardingPass;
 
 /**
  * Class Plane
+ *
  * @package App\Utils\BoardingPasses
  */
 class Plane extends AbstractBoardingPass

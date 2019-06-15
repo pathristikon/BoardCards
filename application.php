@@ -11,11 +11,11 @@
  *
  * Input and output are in array format.
  *
- * @author Dumitru Alexandru
- * @email pathristikon@gmail.com
+ * @author  Dumitru Alexandru <pathristikon@gmail.com>
+ * @licence MIT
  */
 
-require_once(__DIR__ . '/vendor/autoload.php');
+require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Api;
 

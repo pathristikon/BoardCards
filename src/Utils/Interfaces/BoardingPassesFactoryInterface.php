@@ -4,6 +4,7 @@ namespace App\Utils\Interfaces;
 
 /**
  * Interface BoardingPassesFactoryInterface
+ *
  * @package App\Utils\Interfaces
  */
 interface BoardingPassesFactoryInterface

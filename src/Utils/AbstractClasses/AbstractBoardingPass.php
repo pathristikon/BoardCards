@@ -42,6 +42,7 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
 
     /**
      * Get the current class name
+     *
      * @return string
      */
     public static function getClassName()
@@ -51,7 +52,8 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
 
     /**
      * Check if the card has the required fields
-     * @param $card
+     *
+     * @param  $card
      * @return bool
      * @throws \Exception
      */
@@ -63,8 +65,7 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
         {
             $const = "$this->requirements::required_" . $key;
 
-            if(!defined($const))
-            {
+            if(!defined($const)) {
                 throw new \Exception("Missing structure error!");
             }
         }
