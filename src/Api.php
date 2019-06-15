@@ -5,6 +5,7 @@ namespace App;
 
 use App\Utils\Traits;
 use App\Utils\BoardingPasses\BoardingPassesFactory;
+use App\Utils\Interfaces\ApiInterface;
 
 /**
  * Class Api
@@ -16,12 +17,12 @@ use App\Utils\BoardingPasses\BoardingPassesFactory;
  *
  * @package App
  */
-class Api
+class Api implements ApiInterface
 {
     use Traits;
 
     private $cards;
-    private $types;
+    private $response;
 
     public function __construct(array $cards)
     {
@@ -30,10 +31,16 @@ class Api
         $allBoardingCards = $this->createCards();
         $this->sortBoardingCards($allBoardingCards);
 
-        $this->returnResponse([
-           'status' => 200,
-           'message' => $this->createBoardingPassesOutput($allBoardingCards)
-        ]);
+        $this->response = $this->createBoardingPassesOutput($allBoardingCards);
+    }
+
+    /**
+     * Return list of boarding cards
+     * @return array
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**
@@ -52,8 +59,12 @@ class Api
      */
     private function createBoardingPassesOutput(array $boardingPasses)
     {
-        return array_map(function($pass){
+        $boardingPassesOutputs = array_map(function($pass){
            return $pass->output;
         }, $boardingPasses);
+
+        array_push($boardingPassesOutputs, 'You arrived at the destination!');
+
+        return $boardingPassesOutputs;
     }
 }

@@ -52,6 +52,8 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
     /**
      * Check if the card has the required fields
      * @param $card
+     * @return bool
+     * @throws \Exception
      */
     private function checkingCardRequirements($card)
     {
@@ -60,15 +62,12 @@ abstract class AbstractBoardingPass implements BoardingPassInterface
         foreach($cardKeys as $key)
         {
             $const = "$this->requirements::required_" . $key;
+
             if(!defined($const))
             {
-                $this->returnResponse([
-                    'status' => 500,
-                    'message' =>  'Missing structure error!'
-                ]);
-
-                exit;
+                throw new \Exception("Missing structure error!");
             }
         }
+        return true;
     }
 }

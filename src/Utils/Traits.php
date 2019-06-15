@@ -27,25 +27,11 @@ trait Traits
      */
     public function sortBoardingCards(array &$cards): int
     {
-        return usort($cards, function($a, $b) {
-            if($a->destination !== $b->departure)
-            {
+        return usort($cards, function ($a, $b) {
+            if ($a->destination !== $b->departure) {
                 return 1;
             }
             return false;
         });
     }
-
-    /**
-     * The function that prints the response on the screen.
-     * :TODO To return everything back to application.php
-     * @param array $params
-     */
-   public function returnResponse(array $params)
-   {
-       var_dump([
-           'status'  => $params['status'],
-           'message' => $params['message']
-       ]);
-   }
 }
